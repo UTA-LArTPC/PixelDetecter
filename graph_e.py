@@ -42,7 +42,7 @@ for eachEvent in range(0, len(event_indices) - 1):
 				y.append(float(charge.split()[2]))
 				z.append(float(charge.split()[3]))
 				dE.append(float(charge.split()[5]))
-	print dE
+
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection="3d")
 	ax.set_title(title)
