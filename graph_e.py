@@ -1,5 +1,6 @@
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+import numpy as np
 
 data = open("electron_test.dat", "r").read()
 
@@ -22,6 +23,8 @@ for line in data.split("\n"):
 
 dEmax = max(intensity)
 dEmin = min(intensity)
+colors = np.array(intensity)
+norm=plt.Normalize(colors.min(), colors.max())
 
 for eachEvent in range(0, len(event_indices) - 1):
 	event = data[event_indices[eachEvent]:event_indices[eachEvent+1]]
@@ -39,11 +42,15 @@ for eachEvent in range(0, len(event_indices) - 1):
 				y.append(float(charge.split()[2]))
 				z.append(float(charge.split()[3]))
 				dE.append(float(charge.split()[5]))
+	print dE
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection="3d")
 	ax.set_title(title)
 	ax.set_xlabel("X Axis")
 	ax.set_ylabel("Y Axis")
 	ax.set_zlabel("Z Axis")
-	ax.scatter(x, y, z, c="b", marker=".")
+
+	for xp, yp, zp, c in zip(x, y, z, colors):
+	    sc = ax.scatter(xp, yp, zp, c=c, cmap=plt.cm.jet , marker="o", norm=norm)
+	plt.colorbar(sc)
 	plt.show()
