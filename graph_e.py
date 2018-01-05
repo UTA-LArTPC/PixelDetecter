@@ -45,7 +45,6 @@ for eachEvent in range(0, len(event_indices) - 1):
 			track_id = track.split("\n")[0].split(",")[0]
 			tracks = track.split("\n")
 			if tracks[0].split(",")[0].split()[-1] in track_list:
-				plt_track_id = track_id
 				print event_id, track_id
 				for entry in range(0, len(tracks)):
 					charge = tracks[entry]
@@ -58,7 +57,7 @@ for eachEvent in range(0, len(event_indices) - 1):
 							dE.append(float(charge.split()[5]))
 				fig = plt.figure()
 				ax = fig.add_subplot(111, projection="3d")
-				ax.set_title(event_id + " " + plt_track_id)
+				ax.set_title(event_id + " " + track_id)
 				ax.set_xlabel("X Axis")
 				ax.set_ylabel("Y Axis")
 				ax.set_zlabel("Z Axis")
